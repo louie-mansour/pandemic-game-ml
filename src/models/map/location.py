@@ -2,8 +2,8 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import Set
-from colour import Colour
-from city import City
+from src.models.shared.colour import Colour
+from src.models.shared.city import City
 
 MAX_CUBES_PER_COLOUR = 3
 
@@ -17,7 +17,6 @@ class Outbreak(Enum):
 @dataclass
 class Location:
     city: City
-    colour: Colour
     _connections: Set[Location] = field(init=False, repr=False, default_factory=set)
 
     _red_cubes_qty: int = field(default=0, init=False, repr=False)
@@ -30,12 +29,13 @@ class Location:
         """Return connected locations."""
         return self._connections
 
-    def add_connection(self, other: Location) -> None:
-        """Connect this location to another."""
-        if other is self:
-            return
-        self._connections.add(other)
-        other.add_connection(self)
+    def add_connections(self, *others: Location) -> None:
+        """Connect this location to one or more other locations.
+        
+        Args:
+            *others: Variable number of Location objects to connect to
+        """
+        self._connections.update(others)
 
     def _add_cubes(self, qty: int, cube_type: str) -> Outbreak:
         cube_qty_attr = f"_{cube_type}_cubes_qty"

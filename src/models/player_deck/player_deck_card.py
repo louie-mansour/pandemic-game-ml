@@ -1,9 +1,9 @@
 from enum import Enum
-from city import City  # Adjust the import based on your project structure
+from src.models.shared.city import City  # Adjust the import based on your project structure
 
 EPIDEMIC = "Epidemic"
 
-class PlayerDeck(Enum):
+class PlayerDeckCard(Enum):
     ALGIERS = City.ALGIERS
     ATLANTA = City.ATLANTA
     BAGHDAD = City.BAGHDAD
