@@ -1,7 +1,7 @@
 from __future__ import annotations
-from dataclasses import dataclass, field
 from enum import Enum
 from typing import Set
+from models.board.disease_cube_pool import DiseaseCubePool
 from src.models.shared.colour import Colour
 from src.models.shared.city import City
 
@@ -14,27 +14,20 @@ class Outbreak(Enum):
     BLACK = "black"
     NONE = "none"
 
-@dataclass
 class Location:
-    city: City
-    _connections: Set[Location] = field(init=False, repr=False, default_factory=set)
-
-    _red_cubes_qty: int = field(default=0, init=False, repr=False)
-    _blue_cubes_qty: int = field(default=0, init=False, repr=False)
-    _yellow_cubes_qty: int = field(default=0, init=False, repr=False)
-    _black_cubes_qty: int = field(default=0, init=False, repr=False)
+    def __init__(self, city: City):
+        self.city = city
+        self._connections: Set[Location] = set()
+        self._red_cubes_qty: int = 0
+        self._blue_cubes_qty: int = 0
+        self._yellow_cubes_qty: int = 0
+        self._black_cubes_qty: int = 0
 
     @property
     def connections(self) -> Set[Location]:
-        """Return connected locations."""
         return self._connections
 
     def add_connections(self, *others: Location) -> None:
-        """Connect this location to one or more other locations.
-        
-        Args:
-            *others: Variable number of Location objects to connect to
-        """
         self._connections.update(others)
 
     def _add_cubes(self, qty: int, cube_type: str) -> Outbreak:

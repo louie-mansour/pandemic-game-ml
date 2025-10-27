@@ -50,3 +50,7 @@ class City(Enum):
     TAIPEI = ("Taipei", Colour.RED)
     TOKYO = ("Tokyo", Colour.RED)
     WASHINGTON = ("Washington", Colour.BLUE)
+
+    def __init__(self, city_name: str, colour: Colour):
+        self.city_name = city_name
+        self.colour = colour

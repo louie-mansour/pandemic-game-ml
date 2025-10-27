@@ -1,0 +1,102 @@
+# Rename this file to ".gitignore" for Git to pick it up.
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor/IDE
+.vscode/
+.idea/
+*.code-workspace
+*.sublime-*
+*.swp
+*.swo
+*~
+*.orig
+*.rej
+*.bak
+
+# Python bytecode and extensions
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environments
+.venv/
+venv/
+env/
+.env
+.env.*
+.conda/
+.ipython/
+
+# Packaging / build artifacts
+build/
+dist/
+*.egg-info/
+.eggs/
+wheels/
+pip-wheel-metadata/
+.pybuild/
+
+# Testing / coverage
+.pytest_cache/
+.tox/
+.nox/
+.coverage
+.coverage.*
+htmlcov/
+.cache/
+
+# Type checking / linters
+.mypy_cache/
+.pytype/
+.pyre/
+.ruff_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+.jupyter/
+
+# Logs
+logs/
+*.log
+nohup.out
+
+# Node (if present)
+node_modules/
+
+# Temporary files
+tmp/
+temp/
+
+# ML/DS data and artifacts (adjust as needed; keep placeholders if required)
+data/
+datasets/
+outputs/
+output/
+results/
+models/
+checkpoints/
+runs/
+wandb/
+mlruns/
+lightning_logs/
+!data/.gitkeep
+!datasets/.gitkeep
+!models/.gitkeep
+!outputs/.gitkeep
+
+# Common model and artifact files
+*.ckpt
+*.pt
+*.pth
+*.h5
+*.onnx
+*.tflite
+*.joblib
+*.pkl
+*.pickle
+*.npz
+*.npy

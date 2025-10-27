@@ -3,7 +3,7 @@ import random
 
 NUMBER_OF_EPIDEMICS = 2
 
-class InfectionDeck:
+class PlayerDeck:
     def __init__(self):
         self._deck = [
             PlayerDeckCard.ALGIERS,
@@ -60,6 +60,3 @@ class InfectionDeck:
 
     def draw_cards(self, num_cards: int = 1) -> list[PlayerDeckCard]:
         return [self._deck.pop() for _ in range(num_cards)]
-    
-    def draw_bottom_card(self) -> PlayerDeckCard:
-        return self._deck.pop(0)
