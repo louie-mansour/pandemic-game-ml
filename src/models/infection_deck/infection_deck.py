@@ -56,8 +56,8 @@ class InfectionDeck:
         ]
         random.shuffle(self._deck)
 
-    def draw_cards(self, num_cards: int = 1) -> list[InfectionDeckCard]:
-        return [self._deck.pop() for _ in range(num_cards)]
-    
+    def draw_card(self) -> InfectionDeckCard:
+        return self._deck.pop()
+
     def draw_bottom_card(self) -> InfectionDeckCard:
         return self._deck.pop(0)

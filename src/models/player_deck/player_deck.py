@@ -58,5 +58,9 @@ class PlayerDeck:
         self._epidemics = [PlayerDeckCard.EPIDEMIC] * NUMBER_OF_EPIDEMICS
         random.shuffle(self._deck)
 
-    def draw_cards(self, num_cards: int = 1) -> list[PlayerDeckCard]:
-        return [self._deck.pop() for _ in range(num_cards)]
+    def draw_cards(self) -> list[PlayerDeckCard]:
+        cards = []
+        for _ in range(2):
+            if self._deck:
+                cards.append(self._deck.pop())
+        return cards
