@@ -1,45 +1,55 @@
-from models.board.disease_cube_pool import DiseaseCubePool
+from src.models.game.game_state import GameState
 from src.models.shared.colour import Colour
 from src.models.shared.city import City
 from src.models.board.infection_rate import InfectionRate
 from src.models.map.location import Location, Outbreak
-from models.map.location_graph import LocationGraph
+from src.models.map.location_graph import LocationGraph
 from src.models.board.outbreak_counter import OutbreakCounter
-
-NUMBER_OF_PLAYERS = 2
+from src.models.infection_deck.infection_deck import InfectionDeck
 
 class Board:
     def __init__(self):
         self.location_graph: LocationGraph = LocationGraph()
         self.outbreak_counter = OutbreakCounter()
-        self.disease_cube_pool = DiseaseCubePool()
-        # self.number_of_epidemics: int = 0
-        # self.infection_rate = InfectionRate()
-    
-    def add_disease_cubes_to_location(self, city, qty: int, colour: Colour) -> Outbreak:
-        location = self.location_graph.get_location_by_city(city)
-        outbreak = self._add_cubes_from_pool(colour, qty, location)
+        self.infection_rate = InfectionRate()
+        self.infection_deck = InfectionDeck()
 
-        if(outbreak == Outbreak.NONE):
-            return Outbreak.NONE
+        #  Board setup
+        for _ in range(3):
+            city_to_infect = self.infection_deck.draw_card().value
+            self._add_disease_cubes_to_location(city_to_infect, 3, city_to_infect.colour)
         
-        self.outbreak_counter.increment()
-        return outbreak
-        # TODO: outbreak chain handling
+        for _ in range(3):
+            city_to_infect = self.infection_deck.draw_card().value
+            self._add_disease_cubes_to_location(city_to_infect, 2, city_to_infect.colour)
 
+        for _ in range(3):
+            city_to_infect = self.infection_deck.draw_card().value
+            self._add_disease_cubes_to_location(city_to_infect, 1, city_to_infect.colour)
+    
+    def take_turn(self):
+        for _ in range(self.infection_rate.current_rate):
+            city_to_infect = self.infection_deck.draw_card().value
+            self._add_disease_cubes_to_location(city_to_infect, 1, city_to_infect.colour)
 
-    def _add_cubes_from_pool(self, colour: Colour, qty: int, location: Location) -> Outbreak:
-        if colour == Colour.RED:
-            self.disease_cube_pool.take_cubes(Colour.RED, qty)
-            return location.add_red_cubes(qty)
-        elif colour == Colour.BLUE:
-            self.disease_cube_pool.take_cubes(Colour.BLUE, qty)
-            return location.add_blue_cubes(qty)
-        elif colour == Colour.YELLOW:
-            self.disease_cube_pool.take_cubes(Colour.YELLOW, qty)
-            return location.add_yellow_cubes(qty)
-        elif colour == Colour.BLACK:
-            self.disease_cube_pool.take_cubes(Colour.BLACK, qty)
-            return location.add_black_cubes(qty)
-        else:
-            raise Exception("Invalid colour specified.")
+        
+    def _add_disease_cubes_to_location(self, city: City, qty: int, colour: Colour):
+        location = self.location_graph.get_location_by_city(city)
+        bfs_queue = [location]
+        outbroken_cities = set[City]()
+
+        while bfs_queue:
+            current_location = bfs_queue.pop(0)
+            outbreak = current_location.add_cubes(qty, colour)
+            qty = 1 # Subsequent outbreaks only add 1 cube to connected cities
+            if outbreak == Outbreak.NONE:
+                continue
+        
+            if outbroken_cities.__contains__(current_location.city):
+                continue
+
+            game_state = self.outbreak_counter.increment()
+            if game_state == GameState.LOST:
+                return game_state
+            outbroken_cities.add(current_location.city)
+            bfs_queue.extend(current_location.connections)
