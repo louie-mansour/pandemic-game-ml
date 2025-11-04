@@ -58,9 +58,18 @@ class PlayerDeck:
         self._epidemics = [PlayerDeckCard.EPIDEMIC] * NUMBER_OF_EPIDEMICS
         random.shuffle(self._deck)
 
-    def draw_cards(self) -> list[PlayerDeckCard]:
+    def draw_cards(self, qty: int) -> list[PlayerDeckCard]:
         cards = []
-        for _ in range(2):
+        for _ in range(qty):
             if self._deck:
                 cards.append(self._deck.pop())
         return cards
+    
+    def shuffle_epidemics_into_deck(self) -> list[PlayerDeckCard]:
+        segment_size = len(self._deck) // NUMBER_OF_EPIDEMICS
+        segments = [self._deck[i * segment_size:(i + 1) * segment_size] for i in range(NUMBER_OF_EPIDEMICS)]
+        for i in range(NUMBER_OF_EPIDEMICS):
+            segments[i].append(self._epidemics[i])
+            random.shuffle(segments[i])
+        self._deck = [card for segment in segments for card in segment]
+        return self._deck

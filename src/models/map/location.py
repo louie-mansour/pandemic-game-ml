@@ -15,9 +15,8 @@ class Outbreak(Enum):
     NONE = "none"
 
 class Location:
-    def __init__(self, city: City, disease_pool: DiseaseCubePool):
+    def __init__(self, city: City):
         self.city = city
-        self._disease_pool = disease_pool
         self._connections: Set[Location] = set()
         self.cubes = {
             Colour.RED: 0,
@@ -33,21 +32,21 @@ class Location:
     def add_connections(self, *others: Location) -> None:
         self._connections.update(others)
 
-    def add_cubes(self, qty: int, colour: Colour) -> Outbreak:
+    def add_cubes(self, disease_cube_pool: DiseaseCubePool, qty: int, colour: Colour) -> Outbreak:
         if colour not in self.cubes:
             raise Exception("Invalid colour specified.")
 
         current_cubes = self.cubes[colour]
         if current_cubes + qty > MAX_CUBES_PER_COLOUR:
-            self._disease_pool.take_cubes(colour, MAX_CUBES_PER_COLOUR - current_cubes)
+            disease_cube_pool.take_cubes(colour, MAX_CUBES_PER_COLOUR - current_cubes)
             self.cubes[colour] = MAX_CUBES_PER_COLOUR
             return Outbreak(colour.value)
 
         self.cubes[colour] += qty
-        self._disease_pool.take_cubes(colour, qty)
+        disease_cube_pool.take_cubes(colour, qty)
         return Outbreak.NONE
     
-    def remove_cube(self, colour: Colour) -> None:
+    def remove_cube(self, disease_cube_pool: DiseaseCubePool, colour: Colour) -> None:
         if colour not in self.cubes:
             raise Exception("Invalid colour specified.")
 
@@ -55,4 +54,4 @@ class Location:
             raise Exception(f"No {colour.name.lower()} cubes to remove from this location.")
 
         self.cubes[colour] -= 1
-        self._disease_pool.return_cubes(colour, 1)
+        disease_cube_pool.return_cubes(colour, 1)
