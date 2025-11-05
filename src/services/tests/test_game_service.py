@@ -11,4 +11,5 @@ class TestGameService:
         result = game_service.play_pandemic()
 
         # Game should end in either won or lost
-        assert result in [GameState.WON, GameState.LOST]
+        assert result.state == 'lost'
+        assert result.lose_reason.value == 'out_of_player_cards'

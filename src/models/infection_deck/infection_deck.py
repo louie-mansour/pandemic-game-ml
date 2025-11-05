@@ -4,6 +4,7 @@ import random
 
 class InfectionDeck:
     def __init__(self):
+        self._discard = []
         self._deck = [
             InfectionDeckCard.ALGIERS,
             InfectionDeckCard.ATLANTA,
@@ -57,7 +58,16 @@ class InfectionDeck:
         random.shuffle(self._deck)
 
     def draw_card(self) -> InfectionDeckCard:
-        return self._deck.pop()
+        drawn_card = self._deck.pop()
+        self._discard.append(drawn_card)
+        return drawn_card
 
     def draw_bottom_card(self) -> InfectionDeckCard:
-        return self._deck.pop(0)
+        drawn_card = self._deck.pop(0)
+        self._discard.append(drawn_card)
+        return drawn_card
+
+    def reshuffle_discard_pile_into_deck_on_top(self):
+        random.shuffle(self._discard)
+        self._deck = self._deck + self._discard
+        self._discard = []

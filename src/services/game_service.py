@@ -28,6 +28,8 @@ class GameService:
                     return game_state
             
                 game_state = player.draw_cards_from_player_deck(player_deck, 2)
+                if game_state.state == "epidemic":
+                    board.handle_epidemic()
                 if game_state.state != "in_progress":
                     return game_state
             

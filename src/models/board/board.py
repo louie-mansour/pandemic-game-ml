@@ -15,7 +15,6 @@ class Board:
         self.infection_rate = InfectionRate()
         self.infection_deck = InfectionDeck()
         self.disease_cube_pool = DiseaseCubePool()
-
     
     def setup(self):
         for _ in range(3):
@@ -37,6 +36,14 @@ class Board:
             if game_state.state != "in_progress":
                 return game_state
         return GameState(GameState.IN_PROGRESS)
+    
+    def handle_epidemic(self):
+        bottom_card = self.infection_deck.draw_bottom_card().value
+        game_state = self._add_disease_cubes_to_location(bottom_card, 3, bottom_card.colour)
+        if game_state.state == "lost":
+            return game_state
+        self.infection_rate.increase()
+        self.infection_deck.reshuffle_discard_pile_into_deck_on_top()
 
     def _add_disease_cubes_to_location(self, city: City, qty: int, colour: Colour) -> GameState:
         location = self.location_graph.get_location_by_city(city)
