@@ -1,3 +1,4 @@
+from src.models.game.game_state import GameLostReason, GameState
 from src.models.shared.colour import Colour
 
 
@@ -12,12 +13,12 @@ class DiseaseCubePool:
             Colour.BLACK: self.MAX_CUBES
         }
 
-    def take_cubes(self, colour: Colour, qty: int) -> None:
+    def take_cubes(self, colour: Colour, qty: int):
         if colour not in self.cubes:
             raise Exception("Invalid colour specified.")
 
         if qty > self.cubes[colour]:
-            raise Exception(f"Not enough {colour.name.lower()} cubes in the pool.")
+            return GameState(GameState.LOST, GameLostReason.OUT_OF_CUBES)
         self.cubes[colour] -= qty
 
     def return_cubes(self, colour: Colour, qty: int) -> None:

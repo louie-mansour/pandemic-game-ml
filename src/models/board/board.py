@@ -1,5 +1,4 @@
 from src.models.board.disease_cube_pool import DiseaseCubePool
-from src.models.game.game_state import GameState
 from src.models.shared.colour import Colour
 from src.models.shared.city import City
 from src.models.board.infection_rate import InfectionRate
@@ -29,23 +28,18 @@ class Board:
             city_to_infect = self.infection_deck.draw_card().value
             self._add_disease_cubes_to_location(city_to_infect, 1, city_to_infect.colour)
 
-    def take_turn(self) -> GameState:
+    def take_turn(self):
         for _ in range(self.infection_rate.current_rate):
             city_to_infect = self.infection_deck.draw_card().value
-            game_state = self._add_disease_cubes_to_location(city_to_infect, 1, city_to_infect.colour)
-            if game_state.state != "in_progress":
-                return game_state
-        return GameState(GameState.IN_PROGRESS)
+            self._add_disease_cubes_to_location(city_to_infect, 1, city_to_infect.colour)
     
     def handle_epidemic(self):
         bottom_card = self.infection_deck.draw_bottom_card().value
-        game_state = self._add_disease_cubes_to_location(bottom_card, 3, bottom_card.colour)
-        if game_state.state == "lost":
-            return game_state
+        self._add_disease_cubes_to_location(bottom_card, 3, bottom_card.colour)
         self.infection_rate.increase()
         self.infection_deck.reshuffle_discard_pile_into_deck_on_top()
 
-    def _add_disease_cubes_to_location(self, city: City, qty: int, colour: Colour) -> GameState:
+    def _add_disease_cubes_to_location(self, city: City, qty: int, colour: Colour):
         location = self.location_graph.get_location_by_city(city)
         bfs_queue = [location]
         outbroken_cities = set[City]()
@@ -60,9 +54,6 @@ class Board:
             if outbroken_cities.__contains__(current_location.city):
                 continue
 
-            game_state = self.outbreak_counter.increment()
-            if game_state == GameState.LOST:
-                return game_state
+            self.outbreak_counter.increment()
             outbroken_cities.add(current_location.city)
             bfs_queue.extend(current_location.connections)
-        return GameState(GameState.IN_PROGRESS)
