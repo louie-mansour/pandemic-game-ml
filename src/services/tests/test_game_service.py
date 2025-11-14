@@ -1,6 +1,6 @@
 import pytest
+from exceptions.game_end_exceptions import TooManyOutbreaksException
 from src.services.game_service import GameService
-from src.models.game.game_state import GameState
 
 
 class TestGameService:
@@ -8,8 +8,5 @@ class TestGameService:
     def test_play_pandemic_initializes_and_runs(self):
         """Test that play_pandemic initializes game components and runs."""
         game_service = GameService()
-        result = game_service.play_pandemic()
-
-        # Game should end in either won or lost
-        assert result.state == 'lost'
-        assert result.lose_reason.value == 'out_of_player_cards'
+        with pytest.raises(TooManyOutbreaksException):
+            game_service.play_pandemic()

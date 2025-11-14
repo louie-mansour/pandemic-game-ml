@@ -1,4 +1,4 @@
-from src.models.game.game_state import GameLostReason, GameState
+from exceptions.game_end_exceptions import DiseaseCubesDepletedException
 from src.models.shared.colour import Colour
 
 
@@ -18,7 +18,7 @@ class DiseaseCubePool:
             raise Exception("Invalid colour specified.")
 
         if qty > self.cubes[colour]:
-            return GameState(GameState.LOST, GameLostReason.OUT_OF_CUBES)
+            raise DiseaseCubesDepletedException(colour.name.lower())
         self.cubes[colour] -= qty
 
     def return_cubes(self, colour: Colour, qty: int) -> None:

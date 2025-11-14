@@ -1,4 +1,5 @@
-from src.models.game.game_state import GameState
+from exceptions.game_event_exceptions import EpidemicException
+from models.game import game_state
 from src.models.player.player import Player
 from src.models.board.board import Board
 from src.models.shared.city import City
@@ -18,25 +19,16 @@ class GameService:
             player.draw_cards_from_player_deck(player_deck, 2)
         player_deck.shuffle_epidemics_into_deck()
 
-        game_state = GameState(GameState.IN_PROGRESS)
         turn = 0
         while True:
             for player in players:
                 turn += 1
-                game_state = player.take_turn()
-                if game_state.state != "in_progress":
-                    return game_state
+                player.take_turn()
             
-                game_state = player.draw_cards_from_player_deck(player_deck, 2)
-                if game_state.state == "epidemic":
+                try:
+                    player.draw_cards_from_player_deck(player_deck, 2)
+                except EpidemicException:
                     board.handle_epidemic()
-                if game_state.state != "in_progress":
-                    return game_state
             
-            game_state = board.take_turn()
-            if game_state.state != "in_progress":
-                return game_state
-
-            if game_state.state != "in_progress":
-                return game_state
+            board.take_turn()
     
