@@ -5,7 +5,6 @@ from src.services.game_service import GameService
 class TestGameService:
 
     def test_play_pandemic_initializes_and_runs(self):
-        """Test that play_pandemic initializes game components and runs."""
         game_service = GameService()
         # logging.basicConfig(level=logging.INFO, force=True)
         # logging.getLogger().setLevel(logging.INFO)

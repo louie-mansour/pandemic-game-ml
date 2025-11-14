@@ -12,7 +12,8 @@ class GameService:
     def play_pandemic(self):
         board = Board()
         player_deck = PlayerDeck()
-        players = [Player(City.ATLANTA), Player(City.ATLANTA)]
+        atlanta_location = board.location_graph.get_location_by_city(City.ATLANTA)
+        players = [Player(atlanta_location), Player(atlanta_location)]
 
         board.setup()
         for player in players:
@@ -23,7 +24,7 @@ class GameService:
         while True:
             for player in players:
                 turn += 1
-                logging.info(f"\n--- Turn {turn}: Player at {player.city.name} ---")
+                logging.info(f"\n--- Turn {turn}: Player at {player.location.city.name} ---")
                 player.take_turn()
             
                 try:
@@ -31,4 +32,3 @@ class GameService:
                 except EpidemicException:
                     board.handle_epidemic()
                 board.take_turn()
-    
