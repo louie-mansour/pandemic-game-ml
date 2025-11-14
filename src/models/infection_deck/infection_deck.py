@@ -1,3 +1,4 @@
+import logging
 from src.models.infection_deck.infection_deck_card import InfectionDeckCard
 import random
 
@@ -64,6 +65,7 @@ class InfectionDeck:
 
     def draw_bottom_card(self) -> InfectionDeckCard:
         drawn_card = self._deck.pop(0)
+        logging.info(f"Epidemic infecting {drawn_card.value.name} from bottom of infection deck")
         self._discard.append(drawn_card)
         return drawn_card
 

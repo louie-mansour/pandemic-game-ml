@@ -1,3 +1,4 @@
+import logging
 from src.models.board.disease_cube_pool import DiseaseCubePool
 from src.models.shared.colour import Colour
 from src.models.shared.city import City
@@ -40,6 +41,7 @@ class Board:
         self.infection_deck.reshuffle_discard_pile_into_deck_on_top()
 
     def _add_disease_cubes_to_location(self, city: City, qty: int, colour: Colour):
+        logging.info(f"Infecting {city.name} with {qty} {colour.name} disease cube(s)")
         location = self.location_graph.get_location_by_city(city)
         bfs_queue = [location]
         outbroken_cities = set[City]()

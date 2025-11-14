@@ -1,5 +1,5 @@
+import logging
 from exceptions.game_event_exceptions import EpidemicException
-from models.game import game_state
 from src.models.player.player import Player
 from src.models.board.board import Board
 from src.models.shared.city import City
@@ -16,19 +16,19 @@ class GameService:
 
         board.setup()
         for player in players:
-            player.draw_cards_from_player_deck(player_deck, 2)
+            player.draw_cards_from_player_deck(player_deck, 4)
         player_deck.shuffle_epidemics_into_deck()
 
         turn = 0
         while True:
             for player in players:
                 turn += 1
+                logging.info(f"\n--- Turn {turn}: Player at {player.city.name} ---")
                 player.take_turn()
             
                 try:
                     player.draw_cards_from_player_deck(player_deck, 2)
                 except EpidemicException:
                     board.handle_epidemic()
-            
-            board.take_turn()
+                board.take_turn()
     
