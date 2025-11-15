@@ -11,16 +11,16 @@ Ensure `poetry` is available and up to date via `pip`:
 ```bash
 python -m pip install --upgrade poetry
 cd <project_dir>
-poetry install
+poetry install --no-root --with=dev
 ```
 
 This creates a new virtual environment in the default location with the current Python interpreter.  
 
 It also installs the required dependencies to run the project.  
 
-For development purposes, you can include the `--group=dev` argument to the install command.
-
 This will include packages designated for development (ie, testing or static analysis tools)
+
+Currently, the project is not packageable, hence the `--no-root` flag.  
 
 
 ## Usage

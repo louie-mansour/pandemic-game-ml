@@ -5,6 +5,7 @@ description = "A project to train an AI agent to play the game Pandemic"
 license = "MIT"
 readme = "README.md"
 requires-python = ">=3.14"
+package-mode = false
 dependencies = [
 ]
 
