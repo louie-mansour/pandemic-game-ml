@@ -1,33 +1,42 @@
-# My Python CLI
+# Pandemic Game ML
 
-This project is a command-line interface (CLI) tool built in Python. It provides a simple way to interact with various functionalities through the command line.
+This project intends to model and train an AI agent to play the board game, [Pandemic](https://www.zmangames.com/game/pandemic/).
 
 ## Installation
 
-To install the project, clone the repository and install the required dependencies:
+The project is managed via the [Poetry](https://python-poetry.org/docs/) cli tool.  
+
+Ensure `poetry` is available and up to date via `pip`:
 
 ```bash
-git clone <repository-url>
-cd my-python-cli
-pip install -r requirements.txt
+python -m pip install --upgrade poetry
+cd <project_dir>
+poetry install
 ```
+
+This creates a new virtual environment in the default location with the current Python interpreter.  
+
+It also installs the required dependencies to run the project.  
+
+For development purposes, you can include the `--group=dev` argument to the install command.
+
+This will include packages designated for development (ie, testing or static analysis tools)
+
 
 ## Usage
 
-To run the CLI, use the following command:
+If a CLI is available, it will be run via the following command:
 
 ```bash
-python -m my_python_cli
+python -m pandemic-game-ml <args>
 ```
-
-You can also pass various arguments to the CLI to perform different actions. For more details on available commands and options, refer to the documentation in `cli.py`.
 
 ## Running Tests
 
 To run the tests for this project, use the following command:
 
 ```bash
-pytest tests/test_cli.py
+poetry run pytest
 ```
 
 ## Contributing
