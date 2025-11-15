@@ -1,6 +1,7 @@
 import pytest
-from exceptions.game_end_exceptions import TooManyOutbreaksException
-from src.services.game_service import GameService
+from pandemic_game_ml.exceptions.game_end_exceptions import TooManyOutbreaksException
+from pandemic_game_ml.services.game_service import GameService
+
 
 class TestGameService:
 

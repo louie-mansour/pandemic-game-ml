@@ -5,7 +5,7 @@ description = "A project to train an AI agent to play the game Pandemic"
 license = "MIT"
 readme = "README.md"
 requires-python = ">=3.14"
-package-mode = false
+packages = "pandemic_game_ml"
 dependencies = [
 ]
 
@@ -28,4 +28,4 @@ warn_return_any = true
 
 # https://docs.pytest.org/en/7.1.x/reference/reference.html#ini-options-ref
 [tool.pytest.ini_options]
-# pythonpath = "src"
+pythonpath = "src"
