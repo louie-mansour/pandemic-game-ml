@@ -77,7 +77,7 @@ datasets/
 outputs/
 output/
 results/
-models/
+# models/
 checkpoints/
 runs/
 wandb/

@@ -1,4 +1,0 @@
-Flask
-click
-pytest
-mypy

@@ -1,17 +1,31 @@
-[tool.poetry]
-name = "my-python-cli"
+[project]
+name = "pandemic-game-ml"
 version = "0.1.0"
-description = "A command-line interface for my Python project."
-authors = ["Your Name <youremail@example.com>"]
+description = "A project to train an AI agent to play the game Pandemic"
 license = "MIT"
+readme = "README.md"
+requires-python = ">=3.14"
+package-mode = false
+dependencies = [
+]
+
+[dependency-groups]
+dev = [
+    "pytest (>=9.0.1,<10.0.0)",
+    "mypy (>=1.18.2,<2.0.0)"
+]
+
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
 
-[tool.poetry.dependencies]
-python = "^3.8"
+[tool.mypy]
+files = "src"
+strict = false
+check_untyped_defs = true
+warn_return_any = true
 
-[tool.poetry.dev-dependencies]
-pytest = "^6.0"
-mypy = "^0.910"
+# https://docs.pytest.org/en/7.1.x/reference/reference.html#ini-options-ref
+[tool.pytest.ini_options]
+# pythonpath = "src"
