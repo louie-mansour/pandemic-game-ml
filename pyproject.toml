@@ -25,3 +25,7 @@ files = "src"
 strict = false
 check_untyped_defs = true
 warn_return_any = true
+
+# https://docs.pytest.org/en/7.1.x/reference/reference.html#ini-options-ref
+[tool.pytest.ini_options]
+# pythonpath = "src"
