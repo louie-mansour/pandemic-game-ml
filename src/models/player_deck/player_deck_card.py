@@ -53,3 +53,4 @@ class PlayerDeckCard(Enum):
     TOKYO = City.TOKYO
     WASHINGTON = City.WASHINGTON
     EPIDEMIC = EPIDEMIC
+    
