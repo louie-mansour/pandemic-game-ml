@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from enum import Enum
 
 from models.shared.city import City
@@ -17,23 +18,34 @@ class TurnIntentWithCost():
 
 class MovementPossibilities():
     def __init__(self):
-        self.constraints = dict[City, list[ActionCost]]()
+        self.possibilities = dict[City, list[ActionCost]]()
     
     # Undecided if we should reference the City of the PlayerLocationDeckCard here
     def add_possibility(self, city: City, action_cost: ActionCost):
         # Make sure this is covered in unit tests
-        existing_action_costs = self.constraints.get(city)
+        existing_action_costs = self.possibilities.get(city)
         if not existing_action_costs:
-            self.constraints[city] = [action_cost]
+            self.possibilities[city] = [action_cost]
             return
             
         for existing_action_cost in existing_action_costs:
-            if not bool(existing_action_cost.card) and existing_action_cost.actions <= action_cost.actions:
+            if not bool(existing_action_cost.cards) and existing_action_cost.actions <= action_cost.actions:
                 return
-        self.constraints[city] = [action_cost]
+        self.possibilities[city] = [action_cost]
+    
+    def merge(self, other: MovementPossibilities) -> MovementPossibilities:
+        for city, action_costs in other.possibilities.items():
+            for action_cost in action_costs:
+                self.add_possibility(city, action_cost)
+        return self
 
 # Undecided if we should reference the City of the PlayerDeckCard here
-class ActionCost():
-    def __init__(self, actions: int, card: City | None = None):
-        self.actions = actions
-        self.card = card
+@dataclass(frozen=True)
+class ActionCost:
+    actions: int
+    cards: list[City] = []
+
+    def add_action(self, other: ActionCost) -> ActionCost:
+        if set(self.cards) & set(other.cards):
+            raise ValueError("Cannot combine ActionCosts with overlapping cards")
+        return ActionCost(self.actions + other.actions, self.cards + other.cards)
