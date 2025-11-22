@@ -1,7 +1,7 @@
 import pytest
 from exceptions.game_end_exceptions import DiseaseCubesDepletedException
-from src.models.board.disease_cube_pool import DiseaseCubePool
-from src.models.shared.colour import Colour
+from models.board.disease_cube_pool import DiseaseCubePool
+from models.shared.colour import Colour
 
 def test_init_sets_max_cubes_for_all_colours():
     pool = DiseaseCubePool()

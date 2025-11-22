@@ -1,9 +1,9 @@
 import pytest
-from src.models.board import disease_cube_pool
-from src.models.map.location import Location, Outbreak, MAX_CUBES_PER_COLOUR
-from src.models.board.disease_cube_pool import DiseaseCubePool
-from src.models.shared.colour import Colour
-from src.models.shared.city import City
+from models.board import disease_cube_pool
+from models.map.location import Location, Outbreak, MAX_CUBES_PER_COLOUR
+from models.board.disease_cube_pool import DiseaseCubePool
+from models.shared.colour import Colour
+from models.shared.city import City
 
 @pytest.fixture
 def disease_pool():

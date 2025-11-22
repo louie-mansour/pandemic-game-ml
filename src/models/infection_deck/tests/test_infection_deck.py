@@ -1,6 +1,6 @@
 import unittest
 import pytest
-from src.models.infection_deck.infection_deck import InfectionDeck
+from models.infection_deck.infection_deck import InfectionDeck
 import random
 
 

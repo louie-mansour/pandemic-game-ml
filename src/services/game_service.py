@@ -1,9 +1,9 @@
 import logging
 from exceptions.game_event_exceptions import EpidemicException
-from src.models.player.player import Player
-from src.models.board.board import Board
-from src.models.shared.city import City
-from src.models.player_deck.player_deck import PlayerDeck
+from models.player.player import Player
+from models.board.board import Board
+from models.shared.city import City
+from models.player_deck.player_deck import PlayerDeck
 
 class GameService:
     def __init__(self):

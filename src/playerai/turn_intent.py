@@ -43,9 +43,9 @@ class MovementPossibilities():
 @dataclass(frozen=True)
 class ActionCost:
     actions: int
-    cards: list[City] = []
+    cards: tuple[City, ...] = ()
 
     def add_action(self, other: ActionCost) -> ActionCost:
         if set(self.cards) & set(other.cards):
             raise ValueError("Cannot combine ActionCosts with overlapping cards")
-        return ActionCost(self.actions + other.actions, self.cards + other.cards)
+        return ActionCost(self.actions + other.actions, tuple(list(self.cards) + list(other.cards)))

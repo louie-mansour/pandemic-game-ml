@@ -1,5 +1,5 @@
 from enum import Enum
-from src.models.shared.city import City  # Adjust the import based on your project structure
+from models.shared.city import City  # Adjust the import based on your project structure
 
 EPIDEMIC = "Epidemic"
 

@@ -1,10 +1,10 @@
-from src.models.map.location import Location
+from models.map.location import Location
 from collections import deque
 
-from src.models.map.location_graph import LocationGraph
-from src.models.player.player import Player
-from src.models.player_deck.player_deck_card import PlayerDeckCard
-from src.player_ai.turn_intent import ActionCost, MovementPossibilities
+from models.map.location_graph import LocationGraph
+from models.player.player import Player
+from models.player_deck.player_deck_card import PlayerDeckCard
+from playerai.turn_intent import ActionCost, MovementPossibilities
 
 class TurnOptions:
     @staticmethod

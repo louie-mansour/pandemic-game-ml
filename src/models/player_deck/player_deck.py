@@ -1,4 +1,4 @@
-from src.models.player_deck.player_deck_card import PlayerDeckCard
+from models.player_deck.player_deck_card import PlayerDeckCard
 import random
 
 NUMBER_OF_EPIDEMICS = 2

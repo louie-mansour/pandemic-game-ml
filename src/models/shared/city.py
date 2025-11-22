@@ -1,5 +1,5 @@
 from enum import Enum
-from src.models.shared.colour import Colour
+from models.shared.colour import Colour
 
 class City(Enum):
     ALGIERS = ("Algiers", Colour.BLACK)
@@ -48,6 +48,7 @@ class City(Enum):
     ST_PETERSBURG = ("St. Petersburg", Colour.BLUE)
     SYDNEY = ("Sydney", Colour.RED)
     TAIPEI = ("Taipei", Colour.RED)
+    TEHRAN = ("Tehran", Colour.BLACK)
     TOKYO = ("Tokyo", Colour.RED)
     WASHINGTON = ("Washington", Colour.BLUE)
 

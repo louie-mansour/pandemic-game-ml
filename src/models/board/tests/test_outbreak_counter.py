@@ -1,7 +1,7 @@
 import unittest
 import pytest
 from exceptions.game_end_exceptions import TooManyOutbreaksException
-from src.models.board.outbreak_counter import OutbreakCounter, MAX_OUTBREAKS
+from models.board.outbreak_counter import OutbreakCounter, MAX_OUTBREAKS
 
 
 class TestOutbreakCounter(unittest.TestCase):

@@ -1,9 +1,9 @@
 from __future__ import annotations
 from enum import Enum
 from typing import Set
-from src.models.board.disease_cube_pool import DiseaseCubePool
-from src.models.shared.colour import Colour
-from src.models.shared.city import City
+from models.board.disease_cube_pool import DiseaseCubePool
+from models.shared.colour import Colour
+from models.shared.city import City
 
 MAX_CUBES_PER_COLOUR = 3
 

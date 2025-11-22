@@ -1,6 +1,6 @@
 from typing import Dict
-from src.models.shared.city import City
-from src.models.map.location import Location
+from models.shared.city import City
+from models.map.location import Location
 
 
 class LocationGraph:
@@ -52,6 +52,7 @@ class LocationGraph:
             City.ST_PETERSBURG: Location(City.ST_PETERSBURG),
             City.SYDNEY: Location(City.SYDNEY),
             City.TAIPEI: Location(City.TAIPEI),
+            City.TEHRAN: Location(City.TEHRAN),
             City.TOKYO: Location(City.TOKYO),
             City.WASHINGTON: Location(City.WASHINGTON),
         }
@@ -77,8 +78,7 @@ class LocationGraph:
             self.locations[City.LOS_ANGELES], self.locations[City.CHICAGO], self.locations[City.MIAMI], self.locations[City.LIMA], self.locations[City.BOGOTA]
         )
         self.locations[City.MIAMI].add_connections(
-            self.locations[City.ATLANTA], self.locations[City.WASHINGTON], self.locations[City.BOGOTA], self.locations[City.MEXICO_CITY],
-            self.locations[City.SAO_PAULO]
+            self.locations[City.ATLANTA], self.locations[City.WASHINGTON], self.locations[City.BOGOTA], self.locations[City.MEXICO_CITY]
         )
         self.locations[City.WASHINGTON].add_connections(
             self.locations[City.ATLANTA], self.locations[City.NEW_YORK], self.locations[City.MONTREAL], self.locations[City.MIAMI]
@@ -117,7 +117,7 @@ class LocationGraph:
         )
         self.locations[City.ISTANBUL].add_connections(
             self.locations[City.ALGIERS], self.locations[City.MILAN], self.locations[City.ST_PETERSBURG], self.locations[City.MOSCOW],
-            self.locations[City.BAGHDAD]
+            self.locations[City.BAGHDAD], self.locations[City.CAIRO]
         )
         self.locations[City.MOSCOW].add_connections(
             self.locations[City.ST_PETERSBURG], self.locations[City.ISTANBUL]

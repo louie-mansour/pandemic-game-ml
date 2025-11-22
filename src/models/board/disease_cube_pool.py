@@ -1,5 +1,5 @@
 from exceptions.game_end_exceptions import DiseaseCubesDepletedException
-from src.models.shared.colour import Colour
+from models.shared.colour import Colour
 
 
 class DiseaseCubePool:

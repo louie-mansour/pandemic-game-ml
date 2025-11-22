@@ -1,5 +1,5 @@
 import logging
-from src.models.infection_deck.infection_deck_card import InfectionDeckCard
+from models.infection_deck.infection_deck_card import InfectionDeckCard
 import random
 
 

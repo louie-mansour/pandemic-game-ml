@@ -1,12 +1,12 @@
 import logging
-from src.models.board.disease_cube_pool import DiseaseCubePool
-from src.models.shared.colour import Colour
-from src.models.shared.city import City
-from src.models.board.infection_rate import InfectionRate
-from src.models.map.location import Outbreak
-from src.models.map.location_graph import LocationGraph
-from src.models.board.outbreak_counter import OutbreakCounter
-from src.models.infection_deck.infection_deck import InfectionDeck
+from models.board.disease_cube_pool import DiseaseCubePool
+from models.shared.colour import Colour
+from models.shared.city import City
+from models.board.infection_rate import InfectionRate
+from models.map.location import Outbreak
+from models.map.location_graph import LocationGraph
+from models.board.outbreak_counter import OutbreakCounter
+from models.infection_deck.infection_deck import InfectionDeck
 
 class Board:
     def __init__(self):

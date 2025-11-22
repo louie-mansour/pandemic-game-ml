@@ -1,7 +1,7 @@
 from models.map.location_graph import LocationGraph
-from src.models.player.player import Player
-from src.player_ai.turn_intent import MovementPossibilities
-from src.player_ai.turn_options import TurnOptions
+from models.player.player import Player
+from playerai.turn_intent import MovementPossibilities
+from playerai.turn_options import TurnOptions
 
 class TurnDecisionEngine:
 

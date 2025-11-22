@@ -1,6 +1,6 @@
 import unittest
 import pytest
-from src.models.player_deck.player_deck import PlayerDeck
+from models.player_deck.player_deck import PlayerDeck
 import random
 
 

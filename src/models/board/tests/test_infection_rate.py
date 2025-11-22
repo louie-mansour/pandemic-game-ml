@@ -1,5 +1,5 @@
 import pytest
-from src.models.board.infection_rate import InfectionRate
+from models.board.infection_rate import InfectionRate
 
 def test_initial_rate():
     infection_rate = InfectionRate()

@@ -1,8 +1,8 @@
 import pytest
 from exceptions.game_end_exceptions import DiseaseCubesDepletedException, DiseaseCubesDepletedException, TooManyOutbreaksException
-from src.models.board.board import Board
-from src.models.shared.city import City
-from src.models.shared.colour import Colour
+from models.board.board import Board
+from models.shared.city import City
+from models.shared.colour import Colour
 
 def test_board_initialization():
     """Test that board initializes with correct components"""

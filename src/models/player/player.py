@@ -2,8 +2,8 @@ import logging
 from exceptions.game_end_exceptions import PlayerCardsDepletedException
 from exceptions.game_event_exceptions import EpidemicException
 from models.map.location import Location
-from src.models.player_deck.player_deck_card import PlayerDeckCard
-from src.models.player_deck.player_deck import PlayerDeck
+from models.player_deck.player_deck_card import PlayerDeckCard
+from models.player_deck.player_deck import PlayerDeck
 
 HAND_LIMIT = 7
 
